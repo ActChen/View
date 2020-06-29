@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/login.css" rel="stylesheet">
+    <title>诊断问卷详情展示</title>
+</head>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+
+     function showData (data){
+         var str = "";
+         for (var i = 0; i < data.length; i++) {
+             str = "<td>" + data[i].des + "</td><td>" + data[i].option + "</td><td>" + data[i].answer + "</td><td>" + data[i].gread +"</td>";
+             var rowTr = document.createElement('tr');
+             rowTr.className = "tr_node";
+             var child = str;
+             rowTr.innerHTML = child;
+             $(".table_node").append(rowTr)
+         }
+
+     }
+
+     window.onload = function () {
+        var url=decodeURI(window.location.href);
+        console.log(url)
+        let list =  url.split('?');
+        console.log(list)
+        var time = list[1].split('=')[1];
+        console.log(time)
+        var userId = list[2].split('=')[1];
+        console.log(userId)
+        var param = { "time": time, "userId": userId };
+        
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:8080/get/question",
+            contentType: 'application/json',
+            data: JSON.stringify(param),
+            success: function(data){
+                showData(data)
+            },
+            error: function(msg){
+                alert(msg)
+            }
+        })
+
+     }
+</script>
+
+<body class="box">
+    <div class="head">
+        <!-- <img src="../image/logo.jpg"  class="logo" /> -->
+        <br/><b style="font-size: 30px;">  &nbsp 用户答卷详情展示</b>
+    </div>
+    <div>
+        <table class="reference">
+            <head>
+                <tr>
+                    <th>问题</th>
+                    <th>选项</th>
+                    <th>答案</th>
+                    <th>获得成绩</th>
+                </tr>
+            </head>
+            <tbody class="table_node">
+                <tr class="tr_node" ></tr>
+            </tbody>
+        </table>
+    </div>
+</body>  
+</html>

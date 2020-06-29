@@ -1,0 +1,116 @@
+.box {
+    background-color: aliceblue;
+    margin: 0; 
+	padding: 0;
+	border: 0;
+}
+
+.head {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background-image: url(../image/admin_head.jpg);
+}
+
+
+.input {
+    position: relative;
+    width: 520px;
+    height: 25px;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.p {
+    padding: 0;
+    margin: 0;
+    margin-top: -18px;
+    margin-left: 900px;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    border-spacing: 2px;
+    border-color: grey;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: center;
+    font-size: 13px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+td {
+    display: table-cell;
+    vertical-align: inherit;
+    text-align: center;
+    font-size: 13px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+table.reference {
+    border-collapse: separate;
+    border-spacing: 2px;
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+table.reference th {
+    color: #fff;
+    background-color: #555;
+    border: 1px solid #555;
+    font-size: 12px;
+    padding: 3px;
+    vertical-align: top;
+    text-align: center;
+}
+
+table.reference tr:nth-child(even) {
+    background-color: #f6f4f0;
+}
+
+table.reference td {
+    line-height: 2em;
+    min-width: 24px;
+    border: 1px solid #d4d4d4;
+    padding: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    vertical-align: top;
+}
+
+tr td:first-child {
+    min-width: 25px;
+}
+

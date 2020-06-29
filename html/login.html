@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<title>尿失禁诊断平台后台管理系统</title>
+
+<meta name="description" content="">
+
+<meta name="keywords" content="">
+
+<link href="../css/login.css" rel="stylesheet">
+
+</head>
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+  
+    function showData (data){
+         var str = "";
+         //先清空html数据
+         $(".table_node").html('')
+         for (var i = 0; i < data.length; i++) {
+             var item = data[i].advise;
+             localStorage.setItem("item", JSON.stringify(item))
+             str = "<td>" + data[i].name + "</td><td>" + data[i].phone + "</td><td><a href=\"../html/question.html?time=" + data[i].timeStamp + "?userId="+ data[i].userId +"\">答卷详情</a></td><td>" + data[i].conclusion + "</td><td><a href=\"../html/advise.html?data=" + encodeURI(JSON.stringify(item)) + "\">诊断建议详情</a></td><td>" + data[i].time +"</td>";
+             var rowTr = document.createElement('tr');
+             rowTr.className = "tr_node";
+             var child = str;
+             rowTr.innerHTML = child;
+             $(".table_node").append(rowTr)
+         }
+
+     }
+
+    /**
+     * 自动加载诊断记录信息
+    */
+     window.onload = function () {
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:8080/get/static",
+            success: function(data){
+                showData(data);
+            },
+            error: function(msg){
+                alert(msg)
+            }
+        })
+     }
+
+     function searchInfo(){
+         var key = document.getElementById("in").value
+         $.ajax({
+             type: 'GET',
+             url: "http://localhost:8080/do/search/" +key,
+             success: function(data){
+                 showData(data);
+                 console.log(data)
+             }
+         })
+     }
+
+</script>
+<body class="box">
+    <div class="head">
+        <!-- <img src="../image/logo.jpg"  class="logo" /> -->
+        <b style="font-size: 20px;">  &nbsp 尿失禁诊断后台管理系统：</b><input id="in" type="search" class="input" placeholder="请输入电话号码或姓名关键字查询相应诊断记录">
+        <button class="btn" onclick="searchInfo()">搜索</button>
+        <p style="font-size: 10px;" class="p">提示：当前页面显示最新100条诊断记录，若查询更多请使用搜索查询</p>
+    </div>
+    <div>
+        <table class="reference">
+            <head>
+                <tr>
+                    <th>姓名</th>
+                    <th>电话</th>
+                    <th>答卷详情</th>
+                    <th>诊断结果</th>
+                    <th>诊断建议</th>
+                    <th>诊断时间</th>
+                </tr>
+            </head>
+            <tbody class="table_node">
+                <tr class="tr_node" ></tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
